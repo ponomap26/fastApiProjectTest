@@ -5,21 +5,26 @@ from core.models import db_helper
 from . import crud
 from .schemas import Product, ProductCreate
 
-router = APIRouter(tars=["Products"])
+router = APIRouter(tags=["products"])
 
 
-@router.get("/", responses_model=list[Product])
-async def get_products(session: AsyncSession = Depends.db_helper.session_dependencies):
+@router.get("/", response_model=list[Product])
+async def get_products(session: AsyncSession = Depends(db_helper.session_dependencies)):
     return await crud.get_products(session=session)
 
 
-@router.post("/", responses_model=Product)
-async def create_product(session, product_in: ProductCreate):
+@router.post("/", response_model=Product)
+async def create_product(
+    product_in: ProductCreate,
+    session: AsyncSession = Depends(db_helper.session_dependencies),
+):
     return await crud.create_product(session=session, product_in=product_in)
 
 
-@router.get("/{products.id}", responses_model=Product)
-async def get_products(product_id: int, session):
+@router.get("/{products.id}", response_model=Product)
+async def get_products(
+    product_id: int, session: AsyncSession = Depends(db_helper.session_dependencies)
+):
     product = await crud.get_product(session=session, product_id=product_id)
     if product is None:
         return product

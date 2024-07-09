@@ -1,6 +1,18 @@
+from contextlib import asynccontextmanager
+
 import uvicorn
 from fastapi import FastAPI
-from engine.engine import create_db
+from core.models import Base, db_helper
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Load the ML model
+    async with db_helper.engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
+    yield
+
 
 tags_metadata = [
     {
@@ -17,7 +29,12 @@ tags_metadata = [
     },
 ]
 
-app = FastAPI(openapi_tags=tags_metadata, title="Magazine API", tags="Magazine")
+app = FastAPI(
+    openapi_tags=tags_metadata,
+    title="Magazine API",
+    tags="Magazine",
+    lifespan=lifespan,
+)
 
 fake_data = [
     {"id": 1, "role": "admin", "name": "John Doe"},
@@ -58,5 +75,5 @@ def change_user_name(user_id: int, new_name: str):
 
 
 if __name__ == "__main__":
-    create_db("my_database.db")
+
     uvicorn.run(app, host="localhost", port=8080)

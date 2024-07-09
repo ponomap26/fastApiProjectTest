@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, status
-
-
+from fastapi.params import Depends
+from sqlalchemy.ext.asyncio import AsyncSession
+from core.models import db_helper
 from . import crud
 from .schemas import Product, ProductCreate
 
@@ -8,7 +9,7 @@ router = APIRouter(tars=["Products"])
 
 
 @router.get("/", responses_model=list[Product])
-async def get_products(session):
+async def get_products(session: AsyncSession = Depends.db_helper.session_dependencies):
     return await crud.get_products(session=session)
 
 

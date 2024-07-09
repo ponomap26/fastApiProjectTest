@@ -1,6 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
 from engine.engine import create_db
+
 tags_metadata = [
     {
         "name": "users",
@@ -48,6 +49,7 @@ fake_users = [
 
 """запросы к API"""
 
+
 @app.post("/user/{user_id})", tags=["change_name"])
 def change_user_name(user_id: int, new_name: str):
     curent_user = list(filter(lambda user: user.get("id") == user_id, fake_users))[0]
@@ -55,11 +57,6 @@ def change_user_name(user_id: int, new_name: str):
     return {"status": 200, "data": curent_user}
 
 
-
-
-
 if __name__ == "__main__":
-    create_db('my_database.db')
+    create_db("my_database.db")
     uvicorn.run(app, host="localhost", port=8080)
-
-

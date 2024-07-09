@@ -35,7 +35,7 @@ app = FastAPI(
     tags="Magazine",
     lifespan=lifespan,
 )
-
+app.include_router()
 fake_data = [
     {"id": 1, "role": "admin", "name": "John Doe"},
     {"id": 2, "role": "user", "name": "Jane Doe"},

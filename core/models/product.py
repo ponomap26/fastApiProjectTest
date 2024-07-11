@@ -1,4 +1,4 @@
-from sqlalchemy.orm import Mapped, mapped_column, declared_attr
+from sqlalchemy.orm import Mapped
 
 from .base import Base
 
@@ -8,4 +8,4 @@ class Product(Base):
 
     name: Mapped[str]
     description: Mapped[str]
-    prise: Mapped[int]
+    price: Mapped[int]

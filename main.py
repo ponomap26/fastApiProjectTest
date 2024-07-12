@@ -20,11 +20,6 @@ app = FastAPI(
 app.include_router(router=router_v1, prefix=settings.api_v1_prefix)
 
 
-@app.get("/", tags=["users"])
-async def root():
-    return {"message": "Hello World"}
-
-
 #
 
 """запросы к API"""

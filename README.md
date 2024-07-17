@@ -1,4 +1,4 @@
-## FastAPI Project - README.md
+## FastAPI Project 
 
 ### Описание проекта
 

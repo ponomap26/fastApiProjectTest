@@ -1,10 +1,15 @@
+from typing import TYPE_CHECKING
+
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
-from sqlalchemy import Integer
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import Integer, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import Base
 
+if TYPE_CHECKING:
+    from .post import Post
+
 
 class User(Base, SQLAlchemyBaseUserTable):
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    pass
+    username: Mapped[str] = mapped_column(String(32))
+    posts: Mapped[list["Post"]] = relationship(back_populates="user")

@@ -10,3 +10,4 @@ class Profile(UserRelationMixin, Base):
     _user_back_populates = "profile"
     username: Mapped[str | None] = mapped_column(String(32))
     last_name: Mapped[str | None] = mapped_column(String(32))
+    bio: Mapped[str | None] = mapped_column(String)

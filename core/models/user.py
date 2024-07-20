@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from .profile import Profile
 
 
-class User(Base, SQLAlchemyBaseUserTable):
+class User(Base):
     username: Mapped[str] = mapped_column(String(32))
     posts: Mapped[list["Post"]] = relationship(back_populates="user")
     profile: Mapped["Profile"] = relationship(back_populates="user")

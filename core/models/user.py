@@ -1,6 +1,7 @@
 from typing import TYPE_CHECKING
 
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
+from pydantic import EmailStr
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -13,5 +14,6 @@ if TYPE_CHECKING:
 
 class User(Base):
     username: Mapped[str] = mapped_column(String(32))
+    email: Mapped[str] = mapped_column(String())
     posts: Mapped[list["Post"]] = relationship(back_populates="user")
     profile: Mapped["Profile"] = relationship(back_populates="user")

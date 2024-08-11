@@ -1,8 +1,18 @@
 from typing import Annotated
 from annotated_types import MinLen, MaxLen
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, ConfigDict, EmailStr
 
 
-class CreateUser(BaseModel):
-    username: Annotated[str, MinLen(3), MaxLen(20)]
-    email: EmailStr
+class UserBase(BaseModel):
+    username: str
+    email: str
+
+
+class UserCreate(UserBase):
+    pass
+
+
+class User(UserBase):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int

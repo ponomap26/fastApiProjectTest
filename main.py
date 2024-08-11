@@ -4,7 +4,7 @@ from core.config import settings
 
 
 from api_v1 import router as router_v1
-from api_v1.users.views import router as users_router
+
 import uvicorn
 from fastapi import FastAPI
 

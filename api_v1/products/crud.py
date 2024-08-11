@@ -12,11 +12,11 @@ from core.models import Product, product
  Delete"""
 
 
-async def get_products(session: AsyncSession) -> list[Product]:
-    stms = select(Product).order_by(Product.id)
-    result: Result = await session.execute(stms)
+async def get_all_products(session: AsyncSession):
+    stmt = select(Product).order_by(Product.id)
+    result: Result = await session.execute(stmt)
     products = result.scalars().all()
-    return list(products)
+    return products
 
 
 async def get_product(session: AsyncSession, product_id: int) -> Product | None:

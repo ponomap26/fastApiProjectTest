@@ -1,23 +1,17 @@
 from typing import TYPE_CHECKING
 
-from sqlalchemy import ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import ForeignKey, Column, Integer, String
+from sqlalchemy.orm import Mapped, relationship, mapped_column
 
-from . import Base
-
-if TYPE_CHECKING:
-    from .category import Category
-    from .user import User
+from .category import Category
+from .base import Base
 
 
 class Product(Base):
-    __tablename__ = "products"
-
-    id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str]
-    description: Mapped[str]
-    price: Mapped[int]
-    cat_id: Mapped[int] = mapped_column(ForeignKey("categorys.id"))
-    category: Mapped["Category"] = relationship(back_populates="products")
-    owner_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
-    owner: Mapped["User"] = relationship(back_populates="products")
+    __tablename__ = "product"
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    description = Column(String)
+    price = Column(Integer)
+    cat_id = Column(Integer, ForeignKey("category.id"))
+    category = relationship("Category", back_populates="products")

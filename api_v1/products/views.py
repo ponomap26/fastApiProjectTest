@@ -10,10 +10,10 @@ router = APIRouter(tags=["products"])
 
 
 @router.get("/", response_model=list[Product])
-async def get_products(
+async def get_all_products(
     session: AsyncSession = Depends(db_helper.scoped_session_dependency),
 ):
-    return await crud.get_products(session=session)
+    return await crud.get_all_products(session=session)
 
 
 @router.post("/", response_model=Product, status_code=status.HTTP_201_CREATED)

@@ -14,4 +14,4 @@ class Product(Base):
     description = Column(String)
     price = Column(Integer)
     cat_id = Column(Integer, ForeignKey("category.id"))
-    category = relationship("Category", back_populates="products")
+    category = relationship("Category", back_populates="products", lazy="joined")

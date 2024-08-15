@@ -1,6 +1,8 @@
 from fastapi import APIRouter, status
 from fastapi.params import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
+
+
 from core.models import db_helper
 from . import crud
 from .dependencis import product_by_id
@@ -28,6 +30,7 @@ async def create_product(
 async def get_product(
     product: Product = Depends(product_by_id),
 ):
+
     return product
 
 
@@ -37,6 +40,7 @@ async def update_product(
     product: Product = Depends(product_by_id),
     session: AsyncSession = Depends(db_helper.scoped_session_dependency),
 ):
+
     return await crud.update_product(
         session=session, product=product, product_update=product_update
     )

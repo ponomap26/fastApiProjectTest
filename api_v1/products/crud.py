@@ -1,6 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.engine import Result
+from sqlalchemy.orm import joinedload
 
 from api_v1.products.schemas import ProductCreate, ProductUpdate, ProductUpdatePartial
 from core.models import Product, product
@@ -13,7 +14,7 @@ from core.models import Product, product
 
 
 async def get_all_products(session: AsyncSession):
-    stmt = select(Product).order_by(Product.id)
+    stmt = select(Product).options(joinedload(Product.category)).order_by(Product.id)
     result: Result = await session.execute(stmt)
     products = result.scalars().all()
     return products

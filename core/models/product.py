@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING
 
-from sqlalchemy import ForeignKey, Column, Integer, String
+from sqlalchemy import ForeignKey, Column, Integer, String, DateTime, func
 from sqlalchemy.orm import Mapped, relationship, mapped_column
 
 from .category import Category
@@ -15,3 +15,4 @@ class Product(Base):
     price = Column(Integer)
     cat_id = Column(Integer, ForeignKey("category.id"))
     category = relationship("Category", back_populates="products", lazy="joined")
+    created_at = Column(DateTime(timezone=True), server_default=func.now())

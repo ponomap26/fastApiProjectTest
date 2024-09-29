@@ -1,7 +1,7 @@
 from sqlalchemy import String, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from . import User
+from .user import User
 from .base import Base
 from .mixins import UserRelationMixin
 

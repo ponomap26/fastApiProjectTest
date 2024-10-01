@@ -19,7 +19,7 @@ router = APIRouter(tags=["Users"])
 async def get_users(
     session: AsyncSession = Depends(db_helper.scoped_session_dependency),
 ):
-    return await crud.get_users(session=session)
+    return await crud.get_user(session=session)
 
 
 @router.post("/", response_model=User, status_code=status.HTTP_201_CREATED)

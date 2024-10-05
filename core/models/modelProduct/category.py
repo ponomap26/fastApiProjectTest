@@ -5,7 +5,7 @@ from core.models import Base
 
 
 class Category(Base):
-    __tablename__ = "category"
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(nullable=False)
     products = relationship("Product", back_populates="category")

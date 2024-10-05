@@ -2,7 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.engine import Result
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from api_v1.users.schemas import UserCreate
+from api_v1.auch.users.schemas import UserCreate
 from core.models import User
 
 

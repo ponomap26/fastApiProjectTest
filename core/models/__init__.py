@@ -8,12 +8,13 @@ __all__ = (
     "Category",
     "User",
 )
+
 from .base import Base
-from .post import Post
-from .product import Product
+from core.models.modelProduct.category import Category
 
+from core.models.modelUsers.profile import Profile
 
-from .profile import Profile
-from .category import Category
 from .db_helper import DatabaseHelper, db_helper
-from .user import User
+from .modelProduct.product import Product
+from .modelUsers.post import Post
+from .modelUsers.user import User

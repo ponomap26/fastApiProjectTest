@@ -4,8 +4,7 @@ from sqlalchemy.engine import Result
 from sqlalchemy.orm import joinedload
 
 from api_v1.products.schemas import ProductCreate, ProductUpdate, ProductUpdatePartial
-from core.models import Product, product
-
+from core.models import Product
 
 """Create
  Read

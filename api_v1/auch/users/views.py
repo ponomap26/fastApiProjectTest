@@ -3,8 +3,8 @@ from fastapi import APIRouter, Depends, status
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from api_v1.users import crud
-from api_v1.users.schemas import UserCreate, User
+from api_v1.auch.users import crud
+from api_v1.auch.users.schemas import UserCreate, User
 from core.models import db_helper
 
 router = APIRouter(tags=["Users"])
@@ -16,7 +16,7 @@ router = APIRouter(tags=["Users"])
 
 
 @router.get("/", response_model=list[User])
-async def get_users(
+async def get_user(
     session: AsyncSession = Depends(db_helper.scoped_session_dependency),
 ):
     return await crud.get_user(session=session)
